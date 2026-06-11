@@ -1,0 +1,50 @@
+#services:
+#
+#  mongo:
+#    image: mongo:7
+#
+#    ports:
+#      - "27017:27017"
+#
+#  redis:
+#    image: redis:7
+#
+#    ports:
+#      - "6379:6379"
+
+
+services:
+
+  api:
+
+    build: .
+
+    container_name: document-api
+
+    ports:
+      - "5000:5000"
+
+    env_file:
+      - .env
+
+    depends_on:
+      - mongo
+      - redis
+
+  mongo:
+
+    image: mongo:7
+
+    container_name: document-mongo
+
+    ports:
+      - "27017:27017"
+
+  redis:
+
+    image: redis:7
+
+    container_name: document-redis
+
+    ports:
+      - "6379:6379"
